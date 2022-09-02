@@ -9,13 +9,29 @@ from . import JsonObject, JsonList
 
 class Backend(JsonObject):
 
-    FIELDS = {'id': '', 'name': '', 'exit_point_type': 'exitPointType', 'properties': ''}
-    EXIT_POINT_TYPES = ('HTTP', 'CACHE', 'DB', 'WEB_SERVICE', 'MODULE')
+    FIELDS = {
+        'id': '',
+        'name': '',
+        'exit_point_type': 'exitPointType',
+        'properties': ''
+    }
 
-    def __init(self, backend_id=0, name='', exit_point_type='', properties=''):
+    EXIT_POINT_TYPES = (
+        'HTTP',
+        'CACHE',
+        'DB',
+        'WEB_SERVICE',
+        'MODULE',
+        'JDBC',
+        'JMS',
+        'CUSTOM',
+        'RMI',
+        'WEBSOCKET'
+    )
+
+    def __init__(self, backend_id=0, name='', exit_point_type='', properties=''):
         self._exit_point_type = None
-        self.id, self.name, self.exit_point_type, self.properties, = \
-            backend_id, name, exit_point_type, properties
+        (self.id, self.name, self.exit_point_type, self.properties) = (backend_id, name, exit_point_type, properties)
 
     @property
     def exit_point_type(self):
@@ -25,8 +41,8 @@ class Backend(JsonObject):
         return self._exit_point_type
 
     @exit_point_type.setter
-    def exit_point_type(self, exit_point_type):
-        self._list_setter('_exit_point_type', exit_point_type, Backend.EXIT_POINT_TYPES)
+    def exit_point_type(self, new_type):
+        self._list_setter('_exit_point_type', new_type, Backend.EXIT_POINT_TYPES)
 
 
 class Backends(JsonList):
