@@ -19,7 +19,8 @@ class Event(JsonObject):
               'is_read': 'markedAsRead',
               'is_resolved': 'markedAsResolved',
               'severity': '',
-              'sub_type': 'subType'}
+              'sub_type': 'subType'
+    }
 
     """
     https://docs.appdynamics.com/display/PRO42/Events+Reference
@@ -109,7 +110,8 @@ class Event(JsonObject):
         'VERY_SLOW',
         'WORKFLOW_ACTION_END',
         'WORKFLOW_ACTION_FAILED',
-        'WORKFLOW_ACTION_STARTED')
+        'WORKFLOW_ACTION_STARTED'
+    )
 
     def __init__(self, event_id=0, event_type='CUSTOM', sub_type='', summary='', archived=False, event_time_ms=0,
                  is_read=False, is_resolved=False, severity='INFO', deep_link_url='',
