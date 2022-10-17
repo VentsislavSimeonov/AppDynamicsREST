@@ -421,7 +421,7 @@ class AppDynamicsClient(object):
         Exports all entry points from the given app, in XML format
 
         :param int application_id: Application ID
-        :param string rule_type: one of auto, custom, or exclude
+        :param string rule_type: one of auto, custom, or excluded
         :param string tier: name of the tier to export from, optional
 
         :returns: XML string
@@ -547,7 +547,13 @@ class AppDynamicsClient(object):
 
         path = '/controller/policies/{0}'.format(application_id)
 
-        return self.upload(path, json)
+        if not path.startswith('/'):
+            path = '/' + path
+        url = self._base_url + path
+
+        files = {'file': ('policies.json', json)}
+        r = self._get_session().request('POST', url, auth=self._auth, files=files)
+        return r.text
 
     def export_actions(self, application_id):
         """
@@ -1023,16 +1029,16 @@ class AppDynamicsClient(object):
         return self.request('/api/accounts/{0}/applications/{1}/actionsuppressions/{2}'.format(account_id,
                                                                                                app_id,
                                                                                                action_suppression_id),
-                            method="DELETE",
-                            use_json=False)
+                                                                                                method="DELETE",
+                                                                                                use_json=False)
 
     def create_action_suppression(self, account_id, app_id, params):
         return self.request('/api/accounts/{0}/applications/{1}/actionsuppressions'.format(account_id, app_id),
-                            method="POST",
-                            use_json=False,
-                            query=False,
-                            params=params,
-                            headers={'Content-Type': 'application/vnd.appd.cntrl+json;v=1'})
+                                                                                            method="POST",
+                                                                                            use_json=False,
+                                                                                            query=False,
+                                                                                            params=params,
+                                                                                            headers={'Content-Type': 'application/vnd.appd.cntrl+json;v=1'})
 
     def get_license_usage(self, account_id, license_module=None, start_time=None, end_time=None):
         """
