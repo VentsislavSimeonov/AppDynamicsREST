@@ -897,7 +897,7 @@ class AppDynamicsClient(object):
         headers = {'Content-type': 'text/xml', 'Accept': 'text/plain'}
         r = self._get_session().request('POST', url, auth=self._auth, params=params, data=xml, headers=headers)
 
-        return r
+        return r.text
 
     def get_snapshots(self, app_id=None, time_range_type=None, duration_in_mins=None,
                       start_time=None, end_time=None, **kwargs):
