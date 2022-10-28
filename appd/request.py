@@ -460,7 +460,7 @@ class AppDynamicsClient(object):
 
         files = {'file': ('entrypoints.xml', xml)}
         r = self._get_session().request('POST', url, auth=self._auth, files=files)
-        return r.text
+        return r.json
 
     def export_analytics_dynamic_service_configs(self, application_id):
         """
@@ -494,7 +494,7 @@ class AppDynamicsClient(object):
 
         files = {'file': ('actions.xml', xml)}
         r = self._get_session().request('POST', url, auth=self._auth, files=files)
-        return r.text
+        return r.json
 
     def export_custom_dashboard(self, dashboard_id):
         """
@@ -553,7 +553,7 @@ class AppDynamicsClient(object):
 
         files = {'file': ('policies.json', json)}
         r = self._get_session().request('POST', url, auth=self._auth, files=files)
-        return r.text
+        return r.json
 
     def export_actions(self, application_id):
         """
@@ -584,7 +584,7 @@ class AppDynamicsClient(object):
 
         files = {'file': ('actions.json', json)}
         r = self._get_session().request('POST', url, auth=self._auth, files=files)
-        return r.text
+        return r.json
 
     def export_email_action_templates(self):
         """
@@ -612,7 +612,7 @@ class AppDynamicsClient(object):
 
         files = {'file': ('actions.json', json)}
         r = self._get_session().request('POST', url, auth=self._auth, files=files)
-        return r.text
+        return r.json
 
     def export_httprequest_action_templates(self):
         """
