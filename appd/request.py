@@ -640,7 +640,8 @@ class AppDynamicsClient(object):
 
         files = {'file': ('actions.json', json)}
         r = self._get_session().request('POST', url, auth=self._auth, files=files)
-        return r.text
+        # old >> return r.text
+        return r.json
 
     def get_config(self):
         """
